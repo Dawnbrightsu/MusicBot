@@ -1960,6 +1960,14 @@ class MusicBot(discord.Client):
         else:
             raise exceptions.CommandError(self.str.get('cmd-pause-none', 'Player is not playing.'), expire_in=30)
 
+    #Gives Ping to Client!
+    async def cmd_ping(self, guild, channel):
+        embed=discord.Embed(title="Ping\n ", description="If bot is over 50ms please contact Dawnbrightsu. Thanks!")
+        embed.add_field(name="\nResults ", value="\n⏳ Ping: {0}ms ".format(int(round(self.latency*1000,0))), inline=False)
+        embed.set_footer(text='Dawnbrightsu Musicbot (Version 0.1.0)')
+        embed.colour = 9705431
+        await self.safe_send_message(channel,embed)
+
     async def cmd_stop(self, player):
         """
         Usage:
@@ -2551,6 +2559,16 @@ class MusicBot(discord.Client):
         """
         Usage:
             {command_prefix}disconnect
+
+        Forces the bot leave the current voice channel.
+        """
+        await self.disconnect_voice_client(guild)
+        return Response("Disconnected from `{0.name}`".format(guild), delete_after=20)
+
+    async def cmd_leave(self, guild):
+        """
+        Usage:
+            {command_prefix}leave
 
         Forces the bot leave the current voice channel.
         """
