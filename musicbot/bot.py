@@ -1960,6 +1960,20 @@ class MusicBot(discord.Client):
         else:
             raise exceptions.CommandError(self.str.get('cmd-pause-none', 'Player is not playing.'), expire_in=30)
 
+    async def cmd_stop(self, player):
+        """
+        Usage:
+            {command_prefix}stop
+
+        Pauses playback of the current song.
+        """
+
+        if player.is_playing:
+            player.pause()
+            return Response(self.str.get('cmd-pause-reply', 'Paused music in `{0.name}`').format(player.voice_client.channel))
+
+        else:
+            raise exceptions.CommandError(self.str.get('cmd-pause-none', 'Player is not playing.'), expire_in=30)
     async def cmd_resume(self, player):
         """
         Usage:
