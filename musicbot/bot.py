@@ -47,6 +47,7 @@ load_opus_lib()
 log = logging.getLogger(__name__)
 
 
+
 class MusicBot(discord.Client):
     def __init__(self, config_file=None, perms_file=None, aliases_file=None):
         try:
